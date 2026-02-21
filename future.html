@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AegisCare – Future Roadmap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: radial-gradient(circle at top, #020617, #000);
+      color: #e5e7eb;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      padding: 22px;
+      font-size: 28px;
+      font-weight: 700;
+      color: #7dd3fc;
+      text-shadow: 0 0 16px rgba(125,211,252,0.7);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 24px;
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .card {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(125,211,252,0.2);
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 0 25px rgba(125,211,252,0.08);
+      transition: 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 35px rgba(125,211,252,0.25);
+    }
+
+    h2 { margin-top: 0; color: #7dd3fc; }
+
+    .timeline { display: grid; gap: 16px; }
+
+    .step {
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px dashed rgba(125,211,252,0.4);
+      background: rgba(2, 6, 23, 0.7);
+    }
+
+    .pill {
+      display: inline-block;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(125,211,252,0.15);
+      border: 1px solid rgba(125,211,252,0.4);
+      margin: 4px 6px 0 0;
+    }
+
+    .nav {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .btn {
+      text-decoration: none;
+      color: #7dd3fc;
+      border: 1px solid rgba(125,211,252,0.5);
+      padding: 12px 18px;
+      border-radius: 999px;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: rgba(125,211,252,0.15);
+      box-shadow: 0 0 16px rgba(125,211,252,0.6);
+    }
+
+    /* Floating interact widget */
+    .chat-btn {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      background: #020617;
+      color: #7dd3fc;
+      border: 1px solid rgba(125,211,252,0.6);
+      border-radius: 999px;
+      padding: 12px 16px;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(125,211,252,0.6);
+    }
+
+    .chat-box {
+      position: fixed;
+      right: 18px;
+      bottom: 70px;
+      width: 260px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(125,211,252,0.4);
+      border-radius: 14px;
+      padding: 14px;
+      display: none;
+      box-shadow: 0 0 30px rgba(125,211,252,0.4);
+    }
+
+    .chat-box input,
+    .chat-box textarea {
+      width: 100%;
+      background: #020617;
+      border: 1px solid rgba(125,211,252,0.3);
+      color: #e5e7eb;
+      border-radius: 8px;
+      padding: 8px;
+      margin-top: 6px;
+    }
+
+    .chat-box button {
+      margin-top: 10px;
+      width: 100%;
+      background: #020617;
+      color: #7dd3fc;
+      border: 1px solid rgba(125,211,252,0.5);
+      padding: 8px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>Our future roadmap</header>
+
+  <div class="container">
+    <div class="card">
+      <h2>Phase 1: MVP (Now)</h2>
+      <div class="timeline">
+        <div class="step">Temperature + Moisture sensing</div>
+        <div class="step">Local dashboard + simulation</div>
+        <div class="step">Early infection risk indication</div>
+        <div class="step">Low-cost, home-usable design</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Phase 2: Intelligence Upgrade</h2>
+      <p>Smarter logic to classify wound states and recommend actions.</p>
+      <span class="pill">FSM Logic</span>
+      <span class="pill">Risk State Classification</span>
+      <span class="pill">Auto Alerts</span>
+      <span class="pill">Care Recommendations</span>
+    </div>
+
+    <div class="card">
+      <h2>Phase 3: Smart Bandage</h2>
+      <p>Integrate sensors into a flexible, skin-safe bandage.</p>
+      <span class="pill">Flexible PCB</span>
+      <span class="pill">Comfort-first Design</span>
+      <span class="pill">Disposable Sensor Pads</span>
+    </div>
+
+    <div class="card">
+      <h2>Phase 4: Advanced Detection</h2>
+      <p>Extend detection beyond temperature and moisture.</p>
+      <span class="pill">Fluid Leakage</span>
+      <span class="pill">pH Sensing</span>
+      <span class="pill">AI Risk Scoring</span>
+    </div>
+
+    <div class="card">
+      <h2>Long-Term Vision</h2>
+      <ul>
+        <li>Remote doctor dashboards</li>
+        <li>Telemedicine integration</li>
+        <li>Scalable for hospitals + home care</li>
+        <li>Affordable kits for rural healthcare</li>
+      </ul>
+      <p><strong>Team:</strong> The Lumens ✨</p>
+    </div>
+
+    <div class="nav">
+      <a class="btn" href="simulation.html">⬅ Back to Simulation</a>
+      <a class="btn" href="connect.html">Connect with Us ➜</a>
+    </div>
+  </div>
+
+  <button class="chat-btn" onclick="toggleChat()">Interact with us 💬</button>
+
+  <div class="chat-box" id="chatBox">
+    <strong>The Lumens</strong>
+    <input placeholder="Your name" />
+    <textarea rows="3" placeholder="Your message"></textarea>
+    <button onclick="alert('Message recorded for demo!')">Send</button>
+  </div>
+
+  <script>
+    function toggleChat() {
+      const box = document.getElementById("chatBox");
+      box.style.display = box.style.display === "block" ? "none" : "block";
+    }
+  </script>
+</body>
+</html>

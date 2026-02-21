@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AegisCare – Problem Statement</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      margin: 0;
+      background: #05070c;
+      color: #e6f6ff;
+      font-family: Arial, sans-serif;
+      line-height: 1.7;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      background: rgba(5,7,12,0.85);
+      backdrop-filter: blur(10px);
+      padding: 1rem;
+      border-bottom: 1px solid rgba(125,211,252,0.2);
+      z-index: 10;
+    }
+
+    .nav a {
+      color: #7dd3fc;
+      text-decoration: none;
+      margin-right: 1rem;
+      font-weight: bold;
+    }
+
+    .wrap {
+      max-width: 1000px;
+      margin: auto;
+      padding: 1.5rem;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1, h2 {
+      color: #7dd3fc;
+      margin-top: 1.2rem;
+    }
+
+    .warning {
+      background: rgba(255, 80, 80, 0.1);
+      border: 1px solid rgba(255, 80, 80, 0.4);
+      padding: 1rem;
+      border-radius: 12px;
+      margin: 1rem 0 1.5rem;
+      color: #ffb3b3;
+      font-size: 0.95rem;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(125,211,252,0.15);
+      border-radius: 14px;
+      padding: 1.2rem 1.2rem 1.4rem;
+      margin: 1rem 0;
+    }
+
+    ul {
+      padding-left: 1.2rem;
+      margin-top: 0.5rem;
+    }
+
+    li {
+      margin: 0.4rem 0;
+    }
+
+    .case {
+      border-left: 4px solid #22d3ee;
+      padding: 0.8rem 1rem;
+      margin-top: 0.8rem;
+      background: rgba(34,211,238,0.06);
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+
+    .img-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 0.8rem;
+      margin-top: 0.8rem;
+    }
+
+    .img-grid img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid rgba(125,211,252,0.25);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .caption {
+      font-size: 0.7rem;
+      opacity: 0.6;
+      margin-top: 0.3rem;
+      text-align: center;
+    }
+
+    .footer {
+      text-align: center;
+      opacity: 0.55;
+      font-size: 0.75rem;
+      margin: 2.5rem 0 1.2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="nav">
+    <a href="home.html">← Home</a>
+    <a href="solution.html">Solution</a>
+    <a href="dashboard.html">Dashboard</a>
+  </div>
+
+  <div class="wrap">
+    <h1>Problem Statement</h1>
+
+    <div class="warning">
+      ⚠️ Content warning: This page contains educational references to real medical conditions and wound care.  
+      Images used are non-graphic and intended for learning and awareness.
+    </div>
+
+    <div class="card">
+      <h2>Post-Operative Wound Care at Home</h2>
+      <ul>
+        <li>Patients are discharged early and expected to manage wound care independently.</li>
+        <li>Daily dressing and hygiene are required to prevent bacterial infection.</li>
+        <li>Subtle signs of infection (temperature/moisture changes) often go unnoticed.</li>
+        <li>Repeated hospital visits for simple dressing increase cost, time, and stress.</li>
+      </ul>
+
+      <div class="case">
+        <strong>General Case Study (Student Experience):</strong><br />
+        After pilonidal sinus surgery, consistent wound dressing and hygiene were required for several weeks.  
+        Any lapse in care risked infection. Recovery involved frequent hospital visits purely for dressing,  
+        making the process exhausting, time-consuming, and heavily dependent on supervision.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Diabetic Foot Ulcers</h2>
+      <ul>
+        <li>Reduced sensation in diabetic patients causes delayed detection of wounds.</li>
+        <li>Moisture buildup and local temperature rise indicate early infection risk.</li>
+        <li>Minor injuries can escalate into ulcers due to poor circulation and delayed care.</li>
+        <li>Late intervention can lead to severe complications and amputations.</li>
+      </ul>
+
+      <div class="img-grid">
+       <img src="images/foot_ulcer.jpg" alt="Educational diabetic foot ulcer reference" />
+<img src="images/postopcare.jpg" alt="Educational post-operative wound dressing reference" />
+<img src="images/pilonidal.jpg" alt="Educational diagram of pilonidal sinus" />
+      </div>
+
+      <div class="caption">
+        Educational references only • Non-graphic • For awareness
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Why Current Approaches Fall Short</h2>
+      <ul>
+        <li>Manual monitoring depends on patient discipline and awareness.</li>
+        <li>No continuous feedback on wound environment (moisture and temperature).</li>
+        <li>Caregivers receive delayed or incomplete information.</li>
+        <li>Existing solutions are costly, clinic-bound, or impractical for daily home use.</li>
+      </ul>
+    </div>
+
+    <div class="footer">
+      AegisCare • Turning real recovery pain into smarter care
+    </div>
+  </div>
+
+</body>
+</html>

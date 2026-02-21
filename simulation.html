@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AegisCare – Simulation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: radial-gradient(circle at top, #020617, #000);
+      color: #e5e7eb;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      font-size: 28px;
+      font-weight: 700;
+      color: #7dd3fc;
+      text-shadow: 0 0 16px rgba(125,211,252,0.7);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 24px;
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .card {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(125,211,252,0.2);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 0 25px rgba(125,211,252,0.08);
+    }
+
+    .slider {
+      width: 100%;
+    }
+
+    .led {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-left: 10px;
+      box-shadow: 0 0 10px currentColor;
+    }
+
+    .green { color: #22c55e; background: #22c55e; }
+    .yellow { color: #facc15; background: #facc15; }
+    .red { color: #ef4444; background: #ef4444; }
+
+    canvas {
+      width: 100%;
+      height: 200px;
+      background: #020617;
+      border-radius: 12px;
+      border: 1px solid rgba(125,211,252,0.2);
+    }
+
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      color: #7dd3fc;
+      border: 1px solid rgba(125,211,252,0.5);
+      padding: 12px 18px;
+      border-radius: 999px;
+      transition: 0.2s;
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    .btn:hover {
+      background: rgba(125,211,252,0.15);
+      box-shadow: 0 0 16px rgba(125,211,252,0.6);
+    }
+
+    .nav {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .embed-container {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(125,211,252,0.2);
+    }
+
+    .embed-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+
+<body>
+  <header>AegisCare – Live Sensor Simulation</header>
+
+  <div class="container">
+    <!-- Temperature Control -->
+    <div class="card">
+      <h3>🌡️ Temperature (°C)</h3>
+      <input id="temp" class="slider" type="range" min="30" max="42" value="36" />
+      <div>
+        Value: <span id="tempVal">36</span> °C
+        <span id="tempLed" class="led green"></span>
+      </div>
+    </div>
+
+    <!-- Moisture Control -->
+    <div class="card">
+      <h3>💧 Moisture (%)</h3>
+      <input id="moist" class="slider" type="range" min="0" max="100" value="40" />
+      <div>
+        Value: <span id="moistVal">40</span> %
+        <span id="moistLed" class="led green"></span>
+      </div>
+    </div>
+
+    <!-- Graph + Wokwi -->
+    <div class="card" style="grid-column: 1 / -1;">
+      <h3>📈 Live Readings + Simulation View</h3>
+      <canvas id="chart"></canvas>
+
+      <!-- Embedded Wokwi (if allowed by site) -->
+      <div class="embed-container">
+        <iframe src="https://wokwi.com/projects/456409123113940993?embed=1"></iframe>
+      </div>
+
+      <!-- Fallback button -->
+      <a class="btn" href="https://wokwi.com/projects/456409123113940993" target="_blank">
+        Open Full Wokwi Simulation
+      </a>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav">
+      <a class="btn" href="solution.html">⬅ Back to Solution</a>
+      <a class="btn" href="future.html">Future Roadmap ➜</a>
+    </div>
+  </div>
+
+  <script>
+    const temp = document.getElementById("temp");
+    const moist = document.getElementById("moist");
+    const tempVal = document.getElementById("tempVal");
+    const moistVal = document.getElementById("moistVal");
+    const tempLed = document.getElementById("tempLed");
+    const moistLed = document.getElementById("moistLed");
+    const canvas = document.getElementById("chart");
+    const ctx = canvas.getContext("2d");
+
+    let data = [];
+
+    function ledState(value, safeMin, safeMax, warnMin, warnMax) {
+      if (value >= safeMin && value <= safeMax) return "green";
+      if (value >= warnMin && value <= warnMax) return "yellow";
+      return "red";
+    }
+
+    function update() {
+      const t = Number(temp.value);
+      const m = Number(moist.value);
+
+      tempVal.textContent = t;
+      moistVal.textContent = m;
+
+      tempLed.className = "led " + ledState(t, 34, 38, 32, 40);
+      moistLed.className = "led " + ledState(m, 25, 60, 15, 80);
+
+      data.push({ t, m });
+      if (data.length > 40) data.shift();
+
+      draw();
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Temperature line
+      ctx.beginPath();
+      ctx.strokeStyle = "#7dd3fc";
+      data.forEach((p, i) => {
+        const x = (i / 39) * canvas.width;
+        const y = canvas.height - (p.t - 30) / 12 * canvas.height;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      });
+      ctx.stroke();
+
+      // Moisture line
+      ctx.beginPath();
+      ctx.strokeStyle = "#facc15";
+      data.forEach((p, i) => {
+        const x = (i / 39) * canvas.width;
+        const y = canvas.height - (p.m / 100) * canvas.height;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      });
+      ctx.stroke();
+    }
+
+    temp.addEventListener("input", update);
+    moist.addEventListener("input", update);
+    update();
+  </script>
+</body>
+</html>

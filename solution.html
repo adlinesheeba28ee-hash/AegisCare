@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AegisCare – Our Solution</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: radial-gradient(circle at top, #020617, #000);
+      color: #e5e7eb;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    header {
+      padding: 24px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+      color: #7dd3fc;
+      text-shadow: 0 0 18px rgba(125,211,252,0.8);
+      cursor: pointer;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 24px;
+      display: grid;
+      gap: 24px;
+    }
+
+    .card {
+      position: relative;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(125,211,252,0.2);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 0 25px rgba(125,211,252,0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 35px rgba(125,211,252,0.25);
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #7dd3fc;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .sensor {
+      position: relative;
+      padding: 16px;
+      border-radius: 12px;
+      background: linear-gradient(145deg, #020617, #020617);
+      border: 1px solid rgba(125,211,252,0.25);
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .sensor:hover {
+      box-shadow: 0 0 25px rgba(125,211,252,0.6);
+    }
+
+    .sensor span {
+      font-size: 36px;
+      display: block;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .pop {
+      position: absolute;
+      left: 50%;
+      bottom: -10px;
+      transform: translateX(-50%) translateY(10px) scale(0.95);
+      background: rgba(2, 6, 23, 0.95);
+      border: 1px solid rgba(125,211,252,0.4);
+      padding: 10px 14px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(125,211,252,0.4);
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.2s ease;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .sensor:hover .pop {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .flow div {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(125,211,252,0.1);
+      border: 1px solid rgba(125,211,252,0.3);
+      box-shadow: 0 0 12px rgba(125,211,252,0.3);
+      cursor: pointer;
+      transition: 0.2s ease;
+      user-select: none;
+    }
+
+    .flow div:hover {
+      background: rgba(125,211,252,0.2);
+      transform: scale(1.05);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: #7dd3fc;
+      border: 1px solid rgba(125,211,252,0.4);
+      padding: 10px 18px;
+      border-radius: 999px;
+      transition: 0.2s;
+    }
+
+    .nav a:hover {
+      background: rgba(125,211,252,0.15);
+      box-shadow: 0 0 12px rgba(125,211,252,0.5);
+    }
+
+    .easter {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      font-size: 12px;
+      opacity: 0;
+      transition: 0.4s ease;
+      color: #7dd3fc;
+    }
+
+    .easter.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <header id="title">AegisCare:Smart Post-Op Wound Monitoring</header>
+
+  <div class="container">
+    <div class="card">
+      <h2>Our Solution</h2>
+      <p>
+        AegisCare is a real-time wound monitoring system designed for patients recovering at home after surgery and for diabetic foot ulcer care.
+        Instead of relying on visual checks and guesswork, AegisCare continuously tracks wound conditions and flags early signs of risk.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Sensors Used</h2>
+      <div class="grid">
+        <div class="sensor">
+          <span>🌡️</span>
+          <strong>Temperature Sensor</strong>
+          <p>Detects abnormal heat that may indicate infection.</p>
+          <div class="pop">Sudden temperature rise = early infection risk.</div>
+        </div>
+
+        <div class="sensor">
+          <span>💧</span>
+          <strong>Moisture Sensor</strong>
+          <p>Tracks wound wetness to prevent bacterial growth.</p>
+          <div class="pop">Excess moisture helps bacteria thrive.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>How AegisCare Works</h2>
+      <div class="flow">
+        <div>Wound Area</div>
+        <div>Embedded Sensors</div>
+        <div>Microcontroller</div>
+        <div>Data Processing</div>
+        <div>Dashboard</div>
+        <div>Alerts</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Why This Is Better</h2>
+      <ul>
+        <li>Early infection detection</li>
+        <li>Reduces hospital visits</li>
+        <li>Objective data beats guessing</li>
+        <li>More confidence for patients</li>
+      </ul>
+    </div>
+
+    <div class="nav">
+      <a href="home.html">⬅ Back to Home</a>
+      <a href="simulation.html">Go to Simulation ➜</a>
+    </div>
+  </div>
+
+  <div class="easter" id="easter">Built by someone who lived the problem.</div>
+
+  <script>
+    document.querySelectorAll(".flow div").forEach(node => {
+      const original = node.textContent;
+      node.addEventListener("click", () => {
+        if (node.textContent.includes("→")) {
+          node.textContent = original;
+        } else {
+          node.textContent = original + " → This stage helps detect early wound risk.";
+        }
+      });
+    });
+
+    let clicks = 0;
+    const title = document.getElementById("title");
+    const easter = document.getElementById("easter");
+
+    title.addEventListener("click", () => {
+      clicks++;
+      if (clicks === 3) {
+        easter.classList.add("show");
+      }
+      setTimeout(() => clicks = 0, 800);
+    });
+  </script>
+</body>
+</html>

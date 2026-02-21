@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AegisCare – Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #ccefff, #e8f8ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Offline animated medical-tech background */
+    .bg {
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background:
+        radial-gradient(circle, rgba(10,76,106,0.18) 1px, transparent 1px),
+        radial-gradient(circle, rgba(10,76,106,0.18) 1px, transparent 1px);
+      background-size: 40px 40px, 40px 40px;
+      background-position: 0 0, 20px 20px;
+      opacity: 0.35;
+      animation: moveBg 35s linear infinite;
+    }
+
+    @keyframes moveBg {
+      from { transform: translate(0, 0); }
+      to { transform: translate(-200px, -200px); }
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      background: rgba(255,255,255,0.9);
+      padding: 2rem;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 380px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+      text-align: center;
+      animation: popIn 0.8s ease;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    h1 {
+      color: #0a4c6a;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+    }
+
+    p {
+      font-size: 0.85rem;
+      color: #444;
+      margin-bottom: 1.2rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      outline: none;
+      font-size: 0.9rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #0a4c6a;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #083b52;
+      transform: translateY(-2px);
+    }
+
+    .note {
+      margin-top: 10px;
+      font-size: 0.7rem;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg"></div>
+
+  <div class="container">
+    <h1>AegisCare</h1>
+    <p>Demo Login / Sign Up (project showcase)</p>
+
+    <input type="email" placeholder="Email" />
+    <input type="password" placeholder="Password" />
+
+    <button onclick="location.href='home.html'">Enter Dashboard</button>
+
+    <div class="note">No real accounts. Prototype UI only.</div>
+  </div>
+</body>
+</html>
