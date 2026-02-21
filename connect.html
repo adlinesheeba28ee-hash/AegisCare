@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AegisCare – Connect</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0a1f2d, #122634);
+      color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 2rem;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      color: #0ad1ff;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      max-width: 600px;
+      line-height: 1.5;
+    }
+
+    .contact-card {
+      background: rgba(10,76,106,0.85);
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      width: 90%;
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      position: relative;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      font-size: 0.95rem;
+    }
+
+    textarea {
+      resize: none;
+      min-height: 100px;
+    }
+
+    button {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      background: #0ad1ff;
+      color: #0a1f2d;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #08b3e0;
+      transform: translateY(-2px);
+    }
+
+    .team-info {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #c0c0c0;
+    }
+
+    .team-info a {
+      color: #0ad1ff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* Floating medical icons (optional background flair) */
+    .floating-icons {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .float {
+      position: absolute;
+      bottom: -40px;
+      width: 28px;
+      opacity: 0.2;
+      animation: driftUp 22s linear infinite;
+    }
+
+    .f1 { left: 10%; animation-duration: 20s; }
+    .f2 { left: 30%; animation-duration: 25s; }
+    .f3 { left: 50%; animation-duration: 18s; }
+    .f4 { left: 70%; animation-duration: 22s; }
+    .f5 { left: 85%; animation-duration: 26s; }
+
+    @keyframes driftUp {
+      from { transform: translateY(0) rotate(0deg); }
+      to { transform: translateY(-120vh) rotate(360deg); }
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Floating icons background -->
+  <div class="floating-icons">
+    <img src="images/healthcare.png" class="float f1" alt="">
+    <img src="images/healthcare.png" class="float f2" alt="">
+    <img src="images/healthcare.png" class="float f3" alt="">
+    <img src="images/healthcare.png" class="float f4" alt="">
+    <img src="images/healthcare.png" class="float f5" alt="">
+  </div>
+
+  <h1>Connect with AegisCare</h1>
+  <p>Have questions, suggestions, or want to collaborate? Reach out to <strong>The Lumens</strong> and we’ll get back to you!</p>
+
+  <div class="contact-card">
+    <input type="text" placeholder="Your Name" />
+    <input type="email" placeholder="Your Email" />
+    <textarea placeholder="Your Message"></textarea>
+    <button onclick="alert('Message sent! (demo)')">Send Message</button>
+  </div>
+
+  <div class="team-info">
+    Team: <strong>The Lumens</strong> <br>
+    Connect on LinkedIn: <a href="https://www.linkedin.com/in/adline-sheeba-1034b932b/" target="_blank">Adline Sheeba</a>
+  </div>
+</body>
+</html>
