@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AegisCare – Premium AI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+:root{
+  --bg:#071f2b; --card:#ffffff; --accent:#2ec4ff; --glow:#00f5d4;
+}
+*{box-sizing:border-box}
+body{font-family:Inter,Arial,sans-serif;background:radial-gradient(circle at top,#0b3a52,var(--bg));color:#fff;padding:20px;min-height:100vh;}
+h1{margin-bottom:4px}
+.muted{opacity:.7;font-size:12px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.badge{background:#ffd166;color:#000;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:700}
+.btn{
+  background:linear-gradient(135deg,#0d4f73,#083b52);
+  color:#fff;border:none;padding:10px 16px;border-radius:12px;
+  cursor:pointer;transition:.2s;box-shadow:0 6px 20px rgba(0,0,0,.3)
+}
+.btn:hover{transform:translateY(-1px);box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.btn:active{transform:translateY(1px)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:16px}
+.card{
+  background:rgba(255,255,255,.96);color:#000;padding:16px;border-radius:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);position:relative;overflow:hidden
+}
+.card::after{
+  content:"";position:absolute;inset:auto -50% 0 -50%;height:120px;
+  background:linear-gradient(120deg,transparent,rgba(46,196,255,.25),transparent);
+  transform:translateX(-100%);transition:1.2s
+}
+.card:hover::after{transform:translateX(100%)}
+.locked{opacity:.55;filter:blur(1px) grayscale(.2)}
+input,select{padding:10px;border-radius:10px;border:1px solid #ccc;width:100%;margin:6px 0}
+#thermalBox{width:100%;height:180px;border-radius:14px;background:linear-gradient(90deg,#0a4c6a,#1fa2ff,#f9d423,#ff4e50);position:relative;overflow:hidden}
+#hotspot{position:absolute;width:60px;height:60px;border-radius:50%;background:radial-gradient(circle,rgba(255,0,0,.8),rgba(255,0,0,.1));filter:blur(3px);display:none;animation:pulse 1.4s infinite}
+@keyframes pulse{0%{transform:scale(.9);opacity:.6}50%{transform:scale(1.15);opacity:.9}100%{transform:scale(.9);opacity:.6}}
+.progress{width:100%;height:8px;background:#ddd;border-radius:999px;overflow:hidden;display:none;margin:8px 0}
+.bar{height:100%;width:0%;background:linear-gradient(90deg,#0a4c6a,#2ec4ff)}
+.spinner{width:18px;height:18px;border:3px solid #ccc;border-top:3px solid var(--accent);border-radius:50%;display:inline-block;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ok{color:#2ecc71}.crit{color:#e74c3c}
+.glow{box-shadow:0 0 0 0 rgba(0,245,212,.8);animation:glow 1.2s ease-out infinite}
+@keyframes glow{0%{box-shadow:0 0 0 0 rgba(0,245,212,.7)}100%{box-shadow:0 0 0 16px rgba(0,245,212,0)}}
+pre{white-space:pre-wrap;font-size:13px}
+</style>
+</head>
+<body>
+
+<h1>✨ AegisCare – Premium AI</h1>
+<p class="muted">Interactive demo of advanced wound screening</p>
+
+<div class="row">
+  <span class="badge" id="plan">Plan: Free</span>
+  <button class="btn glow" onclick="unlockPremium()">Unlock Premium (Demo)</button>
+  <a class="btn" href="dashboard.html">⬅ Dashboard</a>
+</div>
+
+<div class="card" style="margin-top:14px">
+  <h3>🆔 Patient Details</h3>
+  <input id="patientId" placeholder="Patient ID (e.g., AC-1021)">
+  <select id="woundLocation">
+    <option value="">Select wound location</option>
+    <option>Foot (Diabetic Ulcer)</option>
+    <option>Buttock (Pilonidal Sinus)</option>
+    <option>Hand/Arm (Post-operative)</option>
+    <option>Leg</option>
+  </select>
+</div>
+
+<div class="grid">
+  <div class="card locked" id="thermalCard">
+    <h3>📸 Thermal Screening</h3>
+    <div id="thermalBox"><div id="hotspot"></div></div>
+    <p id="thermalStatus" class="muted">Idle</p>
+    <button class="btn" onclick="runThermal()">Run Thermal AI</button>
+  </div>
+
+  <div class="card locked" id="phCard">
+    <h3>🧪 pH Screening</h3>
+    <div id="phStrip" style="width:100%;height:60px;border-radius:10px;background:linear-gradient(90deg,#ff4e50,#f9d423,#1fa2ff);"></div>
+    <div id="phResult"><b>pH:</b> --</div>
+    <div id="phRisk" class="muted">Risk: --</div>
+    <div class="progress" id="phProgress"><div class="bar" id="phBar"></div></div>
+    <p id="phStatus" class="muted">Idle</p>
+    <button class="btn" onclick="runPH()">Run pH AI</button>
+  </div>
+
+  <div class="card locked" id="reportCard">
+    <h3>🧾 Doctor Report</h3>
+    <pre id="reportText">No report yet.</pre>
+    <p id="reportStatus" class="muted">Idle</p>
+    <button class="btn" onclick="generateReport()">Generate Report</button>
+    <button class="btn" onclick="window.print()">Download PDF</button>
+  </div>
+</div>
+
+<script>
+let premium=false, lastThermal="Not analyzed", lastPH="--", lastRisk="--";
+
+function unlockPremium(){
+  premium=true;
+  plan.innerText="Plan: Premium (Demo)";
+  ["thermalCard","phCard","reportCard"].forEach(id=>document.getElementById(id).classList.remove("locked"));
+  alert("Premium unlocked ✨");
+}
+
+function runThermal(){
+  if(!premium) return alert("Premium feature 🔒");
+  thermalStatus.innerHTML="Analyzing thermal patterns <span class='spinner'></span>";
+  setTimeout(()=>{
+    hotspot.style.display="block";
+    hotspot.style.left=Math.random()*200+"px";
+    hotspot.style.top=Math.random()*90+"px";
+    thermalStatus.innerText="Heat anomaly detected";
+    lastThermal="Localized inflammation hotspot detected";
+  },1200);
+}
+
+function runPH(){
+  if(!premium) return alert("Premium feature 🔒");
+  phStatus.innerHTML="Scanning strip <span class='spinner'></span>";
+  phProgress.style.display="block"; phBar.style.width="0%";
+  let p=0; const it=setInterval(()=>{
+    p+=8; phBar.style.width=p+"%";
+    if(p>=100){ clearInterval(it);
+      const ph=(5.6+Math.random()*2.4).toFixed(1);
+      let label="Normal", cls="ok";
+      if(ph<6||ph>7.5){label="Infection risk";cls="crit";}
+      phResult.innerHTML="<b>pH:</b> "+ph;
+      phRisk.innerHTML="Risk: <span class='"+cls+"'>"+label+"</span>";
+      phStatus.innerText="Analysis complete";
+      lastPH=ph; lastRisk=label;
+    }
+  },120);
+}
+
+function generateReport(){
+  if(!premium) return alert("Premium feature 🔒");
+  reportStatus.innerHTML="Compiling report <span class='spinner'></span>";
+  setTimeout(()=>{
+    reportText.innerText=
+`Patient: ${patientId.value||"N/A"}
+Wound: ${woundLocation.value||"N/A"}
+
+Thermal: ${lastThermal}
+pH: ${lastPH} (${lastRisk})
+
+Status: AI screening completed.`;
+    reportStatus.innerText="Report ready for export";
+  },900);
+}
+</script>
+
+</body>
+</html>
