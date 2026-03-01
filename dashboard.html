@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AegisCare Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f7fb;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 { color: #0a4c6a; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .card {
+      background: white;
+      padding: 16px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .value {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+    .status {
+      padding: 10px;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 10px;
+    }
+    .normal { background: green; }
+    .warning { background: orange; }
+    .critical { background: red; }
+  </style>
+</head>
+<body>
+
+<h1>AegisCare: Wound Monitoring Dashboard</h1>
+
+<div class="cards">
+  <div class="card">🌡️ Temp (°C) <div class="value" id="temp">--</div></div>
+  <div class="card">💧 Moisture (%) <div class="value" id="moisture">--</div></div>
+  <div class="card">🤕 Pressure (%) <div class="value" id="pressure">--</div></div>
+  <div class="card">🚨 Status <div id="status" class="status normal">NORMAL</div></div>
+</div>
+
+<canvas id="chart" height="100"></canvas>
+
+<script>
+  const ctx = document.getElementById('chart').getContext('2d');
+  const chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [],
+      datasets: [{
+        label: 'Temperature (°C)',
+        data: [],
+        borderColor: '#0a4c6a',
+        tension: 0.3
+      }]
+    }
+  });
+
+  function updateDashboard(temp, moisture, pressure) {
+    document.getElementById("temp").innerText = temp.toFixed(1);
+    document.getElementById("moisture").innerText = moisture.toFixed(0);
+    document.getElementById("pressure").innerText = pressure.toFixed(0);
+
+    let status = "NORMAL";
+    let statusClass = "normal";
+
+    if (temp > 37.5 || moisture > 75 || pressure > 60) {
+      status = "WARNING";
+      statusClass = "warning";
+    }
+    if (temp > 38.5 || moisture > 85 || pressure > 80) {
+      status = "CRITICAL";
+      statusClass = "critical";
+    }
+
+    const statusEl = document.getElementById("status");
+    statusEl.innerText = status;
+    statusEl.className = "status " + statusClass;
+
+    chart.data.labels.push("");
+    chart.data.datasets[0].data.push(temp);
+    chart.update();
+  }
+
+  // Demo mode (fake live data)
+  setInterval(() => {
+    const temp = 35 + Math.random() * 5;
+    const moisture = Math.random() * 100;
+    const pressure = Math.random() * 100;
+    updateDashboard(temp, moisture, pressure);
+  }, 2000);
+</script>
+
+</body>
+</html>
